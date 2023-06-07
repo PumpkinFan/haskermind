@@ -2,7 +2,7 @@ module GameTypes where
 
 import System.Random
 
-data Piece = Red | Green | Blue | Yellow | White deriving (Eq, Show, Enum, Bounded)
+data Piece = Red | Green | Blue | Yellow | White deriving (Eq, Show, Ord, Enum, Bounded)
 -- type Code = [Piece]
 
 instance Random Piece where
