@@ -12,8 +12,8 @@ countElem x = length . filter (== x)
 calcShared :: [Piece] -> [Piece] -> Int
 calcShared answer guess = 
     let sharedPieces = nub $ intersect answer guess
-        inGuess = map (flip countElem guess) sharedPieces
         inAnswer = map (flip countElem answer) sharedPieces
-    in sum $ zipWith min inGuess inAnswer
+        inGuess = map (flip countElem guess) sharedPieces
+    in sum $ zipWith min inAnswer inGuess
 
 calcBlows answer guess = (calcShared answer guess) - (calcHits answer guess)

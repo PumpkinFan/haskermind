@@ -2,11 +2,20 @@
 Main game file with main function and should handle most IO stuff
 Create separate files for game/calculation functions, randomness functions, type declarations(?), tests
 -}
-import CompareFuncs
+import CompareFuncs (calcHits, calcBlows)
+import AnswerGen (numberOfPieces, genRandomPieces)
+import System.Random
 
-answer = "YGBR"
+-- gameLoop = do
+--     guessInp <- getLine
+--     guess = 
+
+pieceGen = mkStdGen
+answer = genRandomPieces pieceGen
 
 main = do 
+    putStrLn "Welcome to Haskermind!"
+
     guess <- getLine
     if guess == answer
         then do

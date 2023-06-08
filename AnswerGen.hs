@@ -6,5 +6,5 @@ import System.Random
 numberOfPieces :: Int
 numberOfPieces = 4
 
-genRandomCode :: StdGen -> [Piece]
-genRandomCode gen = take numberOfPieces (randoms gen :: [Piece])
+genRandomPieces :: StdGen -> [Piece]
+genRandomPieces gen = take numberOfPieces (randoms gen :: [Piece])
