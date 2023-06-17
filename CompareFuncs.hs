@@ -16,4 +16,5 @@ calcShared answer guess =
         inGuess = map (flip countElem guess) sharedPieces
     in sum $ zipWith min inAnswer inGuess
 
+calcBlows :: [Piece] -> [Piece] -> Int
 calcBlows answer guess = (calcShared answer guess) - (calcHits answer guess)

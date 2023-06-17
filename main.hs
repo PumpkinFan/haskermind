@@ -4,23 +4,41 @@ Create separate files for game/calculation functions, randomness functions, type
 -}
 import CompareFuncs (calcHits, calcBlows)
 import AnswerGen (numberOfPieces, genRandomPieces)
+import IOfuncs (interpretInput)
+import Data.Maybe
 import System.Random
 
--- gameLoop = do
---     guessInp <- getLine
---     guess = 
+import GameTypes
 
-pieceGen = mkStdGen
-answer = genRandomPieces pieceGen
+pieceGen = mkStdGen 0
+-- answer = genRandomPieces pieceGen
+answer = [Red, Green, Blue, Yellow]
+
+gameStartup :: IO ()
+gameStartup = do
+    putStrLn "Welcome to Haskermind!"
+ 
 
 main = do 
-    putStrLn "Welcome to Haskermind!"
+    -- putStrLn "Welcome to Haskermind!"
+    gameStartup
 
-    guess <- getLine
-    if guess == answer
-        then do
-            putStrLn "You win!"
-        else do 
-            putStrLn "Try again"
+    guessInp <- getLine
+    let guessMaybes = interpretInput guessInp
+    if Nothing `elem` guessMaybes
+        then do 
+            putStrLn "\n\
+            \Error interpreting input! \n\
+            \remember to only enter guesses using letters and spaces \n"
             main
+        else do
+            let guess = catMaybes guessMaybes
+            if guess == answer
+            then do
+                putStrLn "You win!"
+            else do 
+                putStrLn "Try again"
+                main
+
+    
 

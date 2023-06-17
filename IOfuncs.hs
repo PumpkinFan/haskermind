@@ -1,6 +1,8 @@
 module IOfuncs where
 
 import qualified Data.Map as Map
+import Data.Maybe (fromMaybe)
+import Data.Char (toLower)
 import GameTypes
 
 pieceMap :: Map.Map String Piece
@@ -18,7 +20,13 @@ pieceMap = Map.fromList [
     ("yellow", Yellow),
     
     ("w", White),
-    ("white", White),
+    ("white", White)
     ]
 
-interpretInput :: String -> [Piece]
+
+interpretInput :: String -> [Maybe Piece]
+interpretInput inpStr = 
+    let lookupPiece inp = Map.lookup inp pieceMap
+        toLowerStr :: String -> String
+        toLowerStr = map toLower
+    in map lookupPiece $ map toLowerStr $ words inpStr
